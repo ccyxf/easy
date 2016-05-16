@@ -1,4 +1,5 @@
 //注意溢出
+//使用long
 
 class Solution {
 public:
