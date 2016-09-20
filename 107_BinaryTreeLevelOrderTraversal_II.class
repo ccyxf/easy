@@ -1,0 +1,54 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+/*BFS
+public class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> result=new LinkedList<List<Integer>>();
+        if(root==null) return result;
+        
+        Queue<TreeNode> nodes=new LinkedList<TreeNode>();
+        nodes.offer(root);
+        
+        while(!nodes.isEmpty())
+        {
+            int count=nodes.size();
+            List<Integer> temp=new ArrayList<Integer>();
+            for(int i=0;i<count;i++)
+            {
+                if(nodes.peek().left!=null) nodes.offer(nodes.peek().left);
+                if(nodes.peek().right!=null) nodes.offer(nodes.peek().right);
+                temp.add(nodes.poll().val);
+            }
+            result.add(0,temp);
+        }
+        
+        return result;
+    }
+}
+*/
+public class Solution{
+    public List<List<Integer>> levelOrderBottom(TreeNode root){
+        List<List<Integer>> result=new LinkedList<List<Integer>>();
+        
+        DFSTraversal(result,root,1);
+        
+        return result;
+    }
+    
+    void DFSTraversal(List<List<Integer>> result,TreeNode root,int level){
+        if(root==null) return;
+        
+        if(level>result.size()) result.add(0,new ArrayList<Integer>());
+        DFSTraversal(result,root.left,level+1);
+        DFSTraversal(result,root.right,level+1);
+        
+        result.get(result.size()-level).add(root.val);
+    }
+}
