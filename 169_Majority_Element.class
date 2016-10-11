@@ -1,0 +1,42 @@
+/*排序
+public class Solution {
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length/2];
+    }
+}
+*/
+
+/*map
+public class Solution {
+    public int majorityElement(int[] nums) {
+        int result=0;
+        Map<Integer,Integer> counts=new HashMap<Integer,Integer>();
+        
+        for(int num:nums){
+            if(!counts.containsKey(num)) 
+                counts.put(num,1);
+            else 
+                counts.put(num,counts.get(num)+1);
+            if(counts.get(num)>nums.length/2){
+                result=num;
+                break;
+            }
+        }
+        
+        return result;
+    }
+}
+*/
+//moore投票算法
+public class Solution {
+    public int majorityElement(int[] nums) {
+        int result=0,count=0;
+        for(int num:nums){
+            if(count==0) result=num;
+            if(num==result) count++;
+            else count--;
+        }
+        return result;
+    }
+}
