@@ -1,0 +1,11 @@
+//2*5为一个0，转化为统计因子中5的个数
+public class Solution {
+    public int trailingZeroes(int n) {
+        int result=0;
+        while(n>0){
+            result+=n/5;
+            n/=5;
+        }
+        return result;
+    }
+}
