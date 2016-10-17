@@ -1,0 +1,47 @@
+//最大公约数
+public class Solution {
+    public void rotate(int[] nums, int k) {
+        if(nums.length<=1) return;
+        
+        int step=k%nums.length;
+        
+        int gcd=findGcd(nums.length,step);
+        int count=nums.length/gcd-1;
+        
+        for(int i=0;i<gcd;i++){
+            int position=i;
+            
+            for(int j=0;j<count;j++){
+                position=(position+step)%nums.length;
+                nums[i]^=nums[position];
+                nums[position]^=nums[i];
+                nums[i]^=nums[position];
+            }
+        }
+    }
+    
+    public int findGcd(int a,int b){//前提：a>=b
+        return (a==0||b==0)?a+b:findGcd(b,a%b);
+    }
+}
+/*三次逆转
+public class Solution {
+    public void rotate(int[] nums, int k) {
+        if(nums.length<=1) return;
+        
+        int step=k%nums.length;
+        reversal(nums,0,nums.length-1);
+        reversal(nums,0,step-1);
+        reversal(nums,step,nums.length-1);
+    }
+    
+    public void reversal(int[] myArray,int a,int b){
+        while(a<b){
+            myArray[a]^=myArray[b];
+            myArray[b]^=myArray[a];
+            myArray[a]^=myArray[b];
+            a++;b--;
+        }
+    }
+}*/
+    
